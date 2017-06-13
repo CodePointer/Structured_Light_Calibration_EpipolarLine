@@ -1,0 +1,31 @@
+main_file_path = 'E:/Structured_Light_Data/20170414/2/';
+ipro_file_path = 'ground_truth/';
+jpro_file_path = 'ground_truth/';
+ipro_file_name = 'ipro_mat';
+jpro_file_name = 'jpro_mat';
+ipro_file_suffix = '.txt';
+jpro_file_suffix = '.txt';
+
+%% Load data
+ipro_mats = zeros(1024, 1280, 30);
+jpro_mats = zeros(1024, 1280, 30);
+for i = 1:30
+    ipro_mats(:,:,i) = load([main_file_path, ...
+        ipro_file_path, ...
+        ipro_file_name, ...
+        num2str(i), ...
+        ipro_file_suffix]);
+    jpro_mats(:,:,i) = load([main_file_path, ...
+        jpro_file_path, ...
+        jpro_file_name, ...
+        num2str(i), ...
+        jpro_file_suffix]);
+end
+
+%% Count Values
+point_valid = cell(1024, 1280);
+for h = 1:1024
+    for w = 1:1280
+        point_valid(h, w) = zeros(2, 1);
+    end
+end
